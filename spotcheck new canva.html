@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpotCheck.bizz - Riset Pasar Profesional</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9)), 
+                        url(bg-surabaya.png) center/cover;
+            position: relative;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(168, 85, 247, 0.2) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0f172a, #1e293b, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+        
+        .service-icon:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .package-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .package-card:hover::before {
+            left: 100%;
+        }
+        
+        .package-diamond {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            position: relative;
+        }
+        
+        .package-diamond::after {
+            content: '💎';
+            position: absolute;
+            top: 5px;
+            right: -15px;
+            font-size: 1rem;
+            opacity: 1;
+            z-index: 10;
+        }
+        
+        .package-gold {
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            position: relative;
+        }
+        
+        .package-gold::after {
+            content: '🥇';
+            position: absolute;
+            top: 5px;
+            right: -15px;
+            font-size: 1rem;
+            opacity: 1;
+            z-index: 10;
+        }
+        
+        .package-silver {
+            background: linear-gradient(135deg, #9ca3af, #6b7280);
+            position: relative;
+        }
+        
+        .package-silver::after {
+            content: '🥈';
+            position: absolute;
+            top: 5px;
+            right: -15px;
+            font-size: 1rem;
+            opacity: 1;
+            z-index: 10;
+        }
+        
+        .package-basic {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            position: relative;
+        }
+        
+        .package-basic::after {
+            content: '⭐';
+            position: absolute;
+            top: 5px;
+            right: -15px;
+            font-size: 1rem;
+            opacity: 1;
+            z-index: 10;
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-divider {
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+            height: 2px;
+            width: 100px;
+            margin: 0 auto;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .feature-highlight {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-left: 4px solid #3b82f6;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-sans">
+  <header><!-- Navigation -->
+   <nav class="nav-glass shadow-lg fixed w-full top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex justify-between items-center h-16">
+      <div class="flex items-center"><img src="logo spotcheckbizz.png" alt="SpotCheck.bizz Logo" class="h-10 w-auto mr-3" onerror="this.style.display='none';"> <span id="company-name" class="text-xl font-bold gradient-text">SpotCheck.bizz</span>
+      </div>
+      <div class="hidden md:block">
+       <div class="ml-10 flex items-baseline space-x-4"><a href="#beranda" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Beranda</a> <a href="#tentang" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Tentang</a> <a href="#layanan" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Layanan</a> <a href="#paket" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Paket</a> <a href="#kontak" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Kontak</a>
+       </div>
+      </div><button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-blue-600">
+       <svg class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div>
+    </div><!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3"><a href="#beranda" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Beranda</a> <a href="#tentang" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Tentang</a> <a href="#layanan" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Layanan</a> <a href="#paket" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Paket</a> <a href="#kontak" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Kontak</a>
+     </div>
+    </div>
+   </nav>
+  </header>
+  <main><!-- Hero Section -->
+   <section id="beranda" class="hero-bg min-h-screen flex items-center justify-center text-white pt-16">
+    <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+     <h1 id="hero-title" class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Konsultasi dan Riset Pasar UMKM Surabaya</h1>
+     <p id="hero-subtitle" class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">Konsultasi dan analisis mendalam untuk memahami pasar sebelum memulai bisnis</p>
+     <div class="flex justify-center mb-12"><a href="#paket" class="cta-button bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"> Lihat Paket Layanan </a>
+     </div>
+    </div>
+   </section><!-- About Section -->
+   <section id="tentang" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16">
+      <h2 id="about-title" class="text-3xl md:text-4xl font-bold gradient-text mb-6">Tentang SpotCheck.bizz</h2>
+      <div class="section-divider mb-8"></div>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Membantu wirausahawan memahami pasar dengan pendekatan ilmiah dan data-driven</p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+       <div class="bg-white p-8 rounded-xl shadow-lg card-hover floating-animation">
+        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+         <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+         </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Mengapa Riset Pasar Penting?</h3>
+        <p class="text-gray-600 leading-relaxed mb-6">Konseling riset pasar sangat penting bagi calon wirausahawan agar dapat memahami kondisi pasar sebelum meluncurkan produk atau jasa. Melalui proses bimbingan ini, calon pelaku usaha dapat belajar mengidentifikasi kebutuhan konsumen, mempelajari perilaku pasar, serta mengenali potensi risiko yang bisa muncul di kemudian hari.</p>
+        <div class="feature-highlight p-4 rounded-lg">
+         <div class="flex items-center text-blue-600">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg><span class="font-semibold">Konsultasi Berbasis Data</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div>
+       <div class="bg-white p-8 rounded-xl shadow-lg card-hover floating-animation" style="animation-delay: 1s;">
+        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+         <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+         </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Metodologi Kami</h3>
+        <p class="text-gray-600 leading-relaxed mb-6">Riset pasar merupakan proses sistematis dalam mengumpulkan, mencatat, dan menganalisis data tentang pasar, pesaing, serta konsumen. Informasi ini membantu pelaku usaha untuk membuat keputusan yang lebih tepat dan mengurangi kemungkinan kesalahan strategi. Dengan memahami pasar sejak awal, calon wirausahawan bisa menyesuaikan ide bisnisnya agar lebih relevan dan kompetitif.</p>
+        <div class="feature-highlight p-4 rounded-lg">
+         <div class="flex items-center text-blue-600">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg><span class="font-semibold">Pendekatan Deskriptif Kuantitatif</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Services Section -->
+   <section id="layanan" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Fasilitas &amp; Produk Kami</h2>
+      <div class="section-divider mb-8"></div>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Layanan komprehensif untuk mendukung kesuksesan bisnis Anda</p>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center card-hover">
+       <div class="service-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-gray-800 mb-3">Survei Digital Konsumen</h3>
+       <p class="text-gray-600">Analisis mendalam terhadap perilaku dan preferensi calon konsumen</p>
+      </div>
+      <div class="text-center card-hover">
+       <div class="service-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-gray-800 mb-3">Analisis Pesaing</h3>
+       <p class="text-gray-600">Monitoring kompetitor lokal dengan pendataan berkala</p>
+      </div>
+      <div class="text-center card-hover">
+       <div class="service-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-gray-800 mb-3">Pemilihan Lokasi</h3>
+       <p class="text-gray-600">Identifikasi lokasi strategis berdasarkan data dan analisis</p>
+      </div>
+      <div class="text-center card-hover">
+       <div class="service-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-gray-800 mb-3">Konsultasi Bisnis</h3>
+       <p class="text-gray-600">Bimbingan strategis berbasis data untuk pengembangan bisnis</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Packages Section -->
+   <section id="paket" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Paket Layanan SpotCheck.bizz</h2>
+      <div class="section-divider mb-8"></div>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Pilih paket yang sesuai dengan kebutuhan bisnis Anda</p>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8"><!-- Diamond Package -->
+      <div class="package-card rounded-xl p-8 shadow-lg card-hover relative overflow-hidden">
+       <div class="package-diamond text-white text-center py-2 px-4 rounded-full text-sm font-bold mb-6 inline-block">
+        DIAMOND
+       </div>
+       <h3 class="text-2xl font-bold text-gray-800 mb-4">SpotCheck.bizz Diamond</h3>
+       <ul class="space-y-3 mb-8">
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Survei digital calon konsumen</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Analisis pesaing 1 tahun (update bulanan)</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Pemilihan lokasi strategis</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Konsultasi bisnis berbasis data</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Pembuatan logo &amp; media sosial</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Perhitungan HPP produk</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Pembuatan BMC</span></li>
+       </ul><button class="w-full bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors"> Segera hadir </button>
+      </div><!-- Gold Package -->
+      <div class="package-card rounded-xl p-8 shadow-lg card-hover">
+       <div class="package-gold text-white text-center py-2 px-4 rounded-full text-sm font-bold mb-6 inline-block">
+        GOLD
+       </div>
+       <h3 class="text-2xl font-bold text-gray-800 mb-4">SpotCheck.bizz Gold</h3>
+       <ul class="space-y-3 mb-8">
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Survei digital calon konsumen</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Analisis pesaing 6 bulan (update bulanan)</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Pemilihan lokasi strategis</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Konsultasi bisnis berbasis data</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Pembuatan logo &amp; media sosial</span></li>
+       </ul><button class="w-full bg-yellow-600 text-white py-3 rounded-lg font-semibold hover:bg-yellow-700 transition-colors"> Segera hadir </button>
+      </div><!-- Silver Package -->
+      <div class="package-card rounded-xl p-8 shadow-lg card-hover">
+       <div class="package-silver text-white text-center py-2 px-4 rounded-full text-sm font-bold mb-6 inline-block">
+        SILVER
+       </div>
+       <h3 class="text-2xl font-bold text-gray-800 mb-4">SpotCheck.bizz Silver</h3>
+       <ul class="space-y-3 mb-8">
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Survei digital calon konsumen</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Analisis pesaing lokal</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Pemilihan lokasi strategis</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Konsultasi bisnis berbasis data</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Pembuatan logo &amp; media sosial</span></li>
+       </ul><button class="w-full bg-gray-500 text-white py-3 rounded-lg font-semibold hover:bg-gray-600 transition-colors"> Pilih Silver </button>
+      </div><!-- Basic Package -->
+      <div class="package-card rounded-xl p-8 shadow-lg card-hover">
+       <div class="package-basic text-white text-center py-2 px-4 rounded-full text-sm font-bold mb-6 inline-block">
+        BASIC
+       </div>
+       <h3 class="text-2xl font-bold text-gray-800 mb-4">SpotCheck.bizz Basic</h3>
+       <ul class="space-y-3 mb-8">
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Survei digital calon konsumen</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Analisis pesaing lokal</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Pemilihan lokasi strategis</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+         </svg><span class="text-gray-600">Konsultasi bisnis berbasis data</span></li>
+       </ul><button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"> Pilih Basic </button>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="kontak" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Hubungi Kami</h2>
+      <div class="section-divider mb-8"></div>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Siap membantu Anda memulai perjalanan bisnis yang sukses</p>
+     </div>
+     <div class="grid md:grid-cols-2 gap-12">
+      <div>
+       <h3 class="text-2xl font-bold text-gray-800 mb-6">Informasi Kontak</h3>
+       <div class="space-y-6">
+        <div class="flex items-center">
+         <div class="service-icon w-12 h-12 rounded-full flex items-center justify-center mr-4">
+          <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-semibold text-gray-800">Telepon</h4>
+          <p id="phone-display" class="text-gray-600">+62 812-3456-7890</p>
+         </div>
+        </div>
+        <div class="flex items-center">
+         <div class="service-icon w-12 h-12 rounded-full flex items-center justify-center mr-4">
+          <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /> <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-semibold text-gray-800">Email</h4>
+          <p id="email-display" class="text-gray-600">info@spotcheck.bizz</p>
+         </div>
+        </div>
+        <div class="flex items-center">
+         <div class="service-icon w-12 h-12 rounded-full flex items-center justify-center mr-4">
+          <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.219-5.175 1.219-5.175s-.311-.623-.311-1.544c0-1.446.839-2.525 1.883-2.525.888 0 1.317.666 1.317 1.466 0 .893-.568 2.229-.861 3.467-.245 1.04.522 1.887 1.549 1.887 1.857 0 3.285-1.958 3.285-4.789 0-2.503-1.799-4.253-4.37-4.253-2.977 0-4.727 2.234-4.727 4.546 0 .9.347 1.863.78 2.388.085.103.098.194.072.299-.079.33-.254 1.037-.289 1.183-.045.188-.147.228-.339.137-1.273-.593-2.068-2.456-2.068-3.956 0-3.298 2.397-6.325 6.913-6.325 3.628 0 6.447 2.584 6.447 6.043 0 3.604-2.273 6.505-5.42 6.505-1.058 0-2.055-.549-2.394-1.274 0 0-.524 1.994-.651 2.48-.236.908-.873 2.047-1.301 2.741C9.672 23.73 10.82 24.001 12.017 24.001c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-semibold text-gray-800">Instagram</h4>
+          <p id="instagram-display" class="text-gray-600">@spotcheck.bizz</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-gray-50 p-8 rounded-xl">
+       <h3 class="text-2xl font-bold text-gray-800 mb-6">Informasi Tambahan</h3>
+       <div class="space-y-4">
+        <div class="feature-highlight p-4 rounded-lg">
+         <h4 class="font-semibold text-gray-800 mb-2">📊 Metodologi Riset</h4>
+         <p class="text-gray-600">Menggunakan pendekatan deskriptif kuantitatif dengan analisis data yang komprehensif</p>
+        </div>
+        <div class="feature-highlight p-4 rounded-lg">
+         <h4 class="font-semibold text-gray-800 mb-2">🎯 Target Pasar</h4>
+         <p class="text-gray-600">Identifikasi segmen pasar yang tepat untuk produk atau jasa Anda</p>
+        </div>
+        <div class="feature-highlight p-4 rounded-lg">
+         <h4 class="font-semibold text-gray-800 mb-2">📈 Analisis Kompetitor</h4>
+         <p class="text-gray-600">Monitoring pesaing dengan update berkala untuk strategi yang lebih baik</p>
+        </div>
+        <div class="feature-highlight p-4 rounded-lg">
+         <h4 class="font-semibold text-gray-800 mb-2">💡 Rekomendasi Strategis</h4>
+         <p class="text-gray-600">Saran berbasis data untuk pengembangan bisnis yang berkelanjutan</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main><!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-3 gap-8">
+     <div>
+      <div class="flex items-center mb-4"><img src="https://photos.app.goo.gl/y6U67KqRHJqS9HWe9" alt="SpotCheck.bizz Logo" class="h-8 w-auto mr-3" onerror="this.style.display='none';"> <span class="text-xl font-bold">SpotCheck.bizz</span>
+      </div>
+      <p class="text-gray-300 leading-relaxed">Konsultasi riset pasar profesional untuk kesuksesan bisnis Anda. Membantu calon wirausahawan memahami pasar sebelum memulai bisnis.</p>
+     </div>
+     <div>
+      <h4 class="text-lg font-semibold mb-4">Layanan Kami</h4>
+      <ul class="space-y-2 text-gray-300">
+       <li>Survei Digital Konsumen</li>
+       <li>Analisis Pesaing Lokal</li>
+       <li>Pemilihan Lokasi Strategis</li>
+       <li>Konsultasi Bisnis Berbasis Data</li>
+      </ul>
+     </div>
+     <div>
+      <h4 class="text-lg font-semibold mb-4">Kontak</h4>
+      <div class="space-y-2 text-gray-300">
+       <p>📞 <span id="footer-phone">+62 812-3456-7890</span></p>
+       <p>✉️ <span id="footer-email">info@spotcheck.bizz</span></p>
+       <p>📱 <span id="footer-instagram">@spotcheck.bizz</span></p>
+      </div>
+     </div>
+    </div>
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+     <p>© 2024 SpotCheck.bizz. Semua hak dilindungi.</p>
+    </div>
+   </div>
+  </footer>
+  <script>
+        // Configuration object
+        const defaultConfig = {
+            company_name: "SpotCheck.bizz",
+            hero_title: "Konsultasi dan Riset Pasar UMKM Surabaya",
+            hero_subtitle: "Konsultasi dan analisis mendalam untuk memahami pasar sebelum memulai bisnis",
+            about_title: "Tentang SpotCheck.bizz",
+            phone_number: "+62 812-3456-7890",
+            email_address: "info@spotcheck.bizz",
+            instagram_handle: "@spotcheck.bizz",
+            primary_color: "#1e40af",
+            secondary_color: "#f8fafc",
+            text_color: "#1f2937",
+            accent_color: "#3b82f6",
+            background_color: "#ffffff"
+        };
+
+        // Mobile menu functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+
+
+        // Element SDK implementation
+        async function onConfigChange(config) {
+            // Update company name
+            const companyNameEl = document.getElementById('company-name');
+            if (companyNameEl) {
+                companyNameEl.textContent = config.company_name || defaultConfig.company_name;
+            }
+
+            // Update hero section
+            const heroTitleEl = document.getElementById('hero-title');
+            if (heroTitleEl) {
+                heroTitleEl.textContent = config.hero_title || defaultConfig.hero_title;
+            }
+
+            const heroSubtitleEl = document.getElementById('hero-subtitle');
+            if (heroSubtitleEl) {
+                heroSubtitleEl.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            }
+
+            // Update about title
+            const aboutTitleEl = document.getElementById('about-title');
+            if (aboutTitleEl) {
+                aboutTitleEl.textContent = config.about_title || defaultConfig.about_title;
+            }
+
+            // Update contact information
+            const phoneDisplayEl = document.getElementById('phone-display');
+            if (phoneDisplayEl) {
+                phoneDisplayEl.textContent = config.phone_number || defaultConfig.phone_number;
+            }
+
+            const emailDisplayEl = document.getElementById('email-display');
+            if (emailDisplayEl) {
+                emailDisplayEl.textContent = config.email_address || defaultConfig.email_address;
+            }
+
+            const instagramDisplayEl = document.getElementById('instagram-display');
+            if (instagramDisplayEl) {
+                instagramDisplayEl.textContent = config.instagram_handle || defaultConfig.instagram_handle;
+            }
+
+            // Update footer contact info
+            const footerPhoneEl = document.getElementById('footer-phone');
+            if (footerPhoneEl) {
+                footerPhoneEl.textContent = config.phone_number || defaultConfig.phone_number;
+            }
+
+            const footerEmailEl = document.getElementById('footer-email');
+            if (footerEmailEl) {
+                footerEmailEl.textContent = config.email_address || defaultConfig.email_address;
+            }
+
+            const footerInstagramEl = document.getElementById('footer-instagram');
+            if (footerInstagramEl) {
+                footerInstagramEl.textContent = config.instagram_handle || defaultConfig.instagram_handle;
+            }
+
+            // Update colors
+            const primaryColor = config.primary_color || defaultConfig.primary_color;
+            const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const accentColor = config.accent_color || defaultConfig.accent_color;
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+
+            // Apply colors to various elements
+            document.body.style.backgroundColor = backgroundColor;
+            document.body.style.color = textColor;
+
+            // Update service icons
+            const serviceIcons = document.querySelectorAll('.service-icon');
+            serviceIcons.forEach(icon => {
+                icon.style.background = `linear-gradient(135deg, ${accentColor}, ${primaryColor})`;
+            });
+
+            // Update package buttons
+            const packageButtons = document.querySelectorAll('.package-card button');
+            packageButtons.forEach(button => {
+                if (button.textContent.includes('Diamond')) {
+                    button.style.backgroundColor = '#f59e0b';
+                } else if (button.textContent.includes('Gold')) {
+                    button.style.backgroundColor = '#d97706';
+                } else if (button.textContent.includes('Silver')) {
+                    button.style.backgroundColor = '#6b7280';
+                } else {
+                    button.style.backgroundColor = accentColor;
+                }
+            });
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.primary_color || defaultConfig.primary_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ primary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.secondary_color || defaultConfig.secondary_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ secondary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.accent_color || defaultConfig.accent_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ accent_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["company_name", config.company_name || defaultConfig.company_name],
+                ["hero_title", config.hero_title || defaultConfig.hero_title],
+                ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                ["about_title", config.about_title || defaultConfig.about_title],
+                ["phone_number", config.phone_number || defaultConfig.phone_number],
+                ["email_address", config.email_address || defaultConfig.email_address],
+                ["instagram_handle", config.instagram_handle || defaultConfig.instagram_handle]
+            ]);
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99eb554c0192471b',t:'MTc2MzE3Mzg5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
